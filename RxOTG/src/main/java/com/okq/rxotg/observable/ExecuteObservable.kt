@@ -1,6 +1,6 @@
 package com.okq.rxotg.observable
 
-import com.okq.rxotg.OtgConfig
+import com.okq.rxotg.OTGConfig
 import com.okq.rxotg.execute.OTGExecute
 import com.okq.rxotg.utils.OtgException
 import rx.Observable
@@ -11,7 +11,7 @@ import rx.schedulers.Schedulers
  * Created by zst on 2016-10-11  0011.
  * 描述:
  */
-class ExecuteObservable(val msg: String, val config: OtgConfig = OtgConfig) : Observable.OnSubscribe<String>, ObservableHelper<String> {
+class ExecuteObservable(val msg: String, val config: OTGConfig = OTGConfig) : Observable.OnSubscribe<String>, ObservableHelper<String> {
     override fun call(subscriber: Subscriber<in String>) {
         checkConnect(subscriber)
         var i = 0

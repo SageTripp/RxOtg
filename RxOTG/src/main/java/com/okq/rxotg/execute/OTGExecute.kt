@@ -30,10 +30,10 @@ object OTGExecute {
     @JvmStatic fun open(ctx: Context) {
         this.ctx = ctx
         if (!isStart) {
-            isStart = true
             d2xxManager = D2xxManager.getInstance(OTGExecute.ctx)
             createDeviceList()
             if (devCount > 0) {
+                isStart = true
                 connectFunction()
                 SetConfig()
                 ftDev?.restartInTask()
@@ -157,9 +157,9 @@ object OTGExecute {
         // reset to UART mode for 232 devices
         ftDev?.setBitMode(0.toByte(), D2xxManager.FT_BITMODE_RESET)
         //设置波特率
-        ftDev?.setBaudRate(OtgParam.baud)
+        ftDev?.setBaudRate(OTGParam.baud)
         //设置停止位,数据位...
-        ftDev?.setDataCharacteristics(OtgParam.data_bit, OtgParam.stop_bit, OtgParam.parity)
+        ftDev?.setDataCharacteristics(OTGParam.data_bit, OTGParam.stop_bit, OTGParam.parity)
         ftDev?.setFlowControl(D2xxManager.FT_FLOW_RTS_CTS, 0x0b.toByte(), 0x0d.toByte())
         ftDev?.clrDtr()
         ftDev?.clrRts()
@@ -167,7 +167,7 @@ object OTGExecute {
 
     }
 
-    object OtgParam {
+    object OTGParam {
         /**
          * 波特率
          */

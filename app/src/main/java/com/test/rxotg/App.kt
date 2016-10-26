@@ -10,10 +10,10 @@ import com.okq.rxotg.rx.RxOTG
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        RxOTG.config(applicationContext)
+        RxOTG.config()
                 .tryTimes(1)
                 .timeout(1000)
                 .setParam()
-                .build()
+                .build(applicationContext)
     }
 }

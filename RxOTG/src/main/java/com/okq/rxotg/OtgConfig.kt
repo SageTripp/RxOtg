@@ -1,5 +1,6 @@
 package com.okq.rxotg
 
+import android.content.Context
 import com.ftdi.j2xx.D2xxManager
 import com.okq.rxotg.execute.OTGExecute
 
@@ -7,7 +8,7 @@ import com.okq.rxotg.execute.OTGExecute
  * Created by zst on 2016-10-11  0011.
  * 描述:
  */
-object OtgConfig {
+object OTGConfig {
 
     var tryTimes: Int = 1
     var timeout: Long = 1000L
@@ -16,7 +17,7 @@ object OtgConfig {
      * 设置重试次数
      * @param times 重试次数
      */
-    @JvmStatic fun tryTimes(times: Int): OtgConfig {
+    @JvmStatic fun tryTimes(times: Int): OTGConfig {
         this.tryTimes = times
         return this
     }
@@ -25,7 +26,7 @@ object OtgConfig {
      * 设置超时时间
      * @param timeout 超时时间
      */
-    @JvmStatic fun timeout(timeout: Long): OtgConfig {
+    @JvmStatic fun timeout(timeout: Long): OTGConfig {
         this.timeout = timeout
         return this
     }
@@ -44,8 +45,8 @@ object OtgConfig {
     fun setParam(baud: Int = 9600,
                  data_bit: Byte = D2xxManager.FT_DATA_BITS_8,
                  stop_bit: Byte = D2xxManager.FT_STOP_BITS_1,
-                 parity: Byte = D2xxManager.FT_PARITY_NONE): OtgConfig {
-        OTGExecute.OtgParam.apply {
+                 parity: Byte = D2xxManager.FT_PARITY_NONE): OTGConfig {
+        OTGExecute.OTGParam.apply {
             this.baud = baud
             this.data_bit = data_bit
             this.stop_bit = stop_bit
@@ -54,8 +55,11 @@ object OtgConfig {
         return this
     }
 
-    fun build() {
-
+    /**
+     * 构建参数,同时打开OTG
+     */
+    fun build(ctx: Context) {
+        OTGExecute.open(ctx)
     }
 
 }

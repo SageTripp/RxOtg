@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.jfrog.bintray'//添加bintray插件
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.okq.RxOtg'
+version = '0.0.2'
 
 android {
     compileSdkVersion 24
@@ -23,6 +28,58 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    repositories {
+        mavenCentral()
+    }
+
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+
+    task javadoc(type: Javadoc) {
+        excludes = ['**/*.kt']
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives javadocJar
+        archives sourcesJar
+    }
+
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    pkg {
+        repo = 'maven'
+        name = 'com.okq.RxOtg'
+
+        version {
+            name = '0.0.2'
+            desc = "Rx模式的OTG通信,主要用于RS485通信"
+            vcsTag = '0.0.2'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/SageTripp/RxOtg.git'
+        websiteUrl = 'https://github.com/SageTripp/RxOtg'
+    }
+
+    configurations = ['archives']
+
 }
 
 dependencies {
@@ -32,7 +89,4 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.1'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile files('libs/d2xx.jar')
-}
-repositories {
-    mavenCentral()
 }
