@@ -1,7 +1,8 @@
 package com.test.rxotg
 
 import android.app.Application
-import com.okq.rxotg.rx.RxOTG
+import com.okq.rxdevice.RxDevice
+import com.okq.rxdevice.execute.RsExecute
 
 /**
  * Created by zst on 2016-10-15  0015.
@@ -10,10 +11,8 @@ import com.okq.rxotg.rx.RxOTG
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        RxOTG.config()
-                .tryTimes(1)
-                .timeout(1000)
-                .setParam()
-                .build(applicationContext)
+        RxDevice.bindExecute(RsExecute())
+        RxDevice.config(1000,1)
+        RxDevice.start(applicationContext)
     }
 }

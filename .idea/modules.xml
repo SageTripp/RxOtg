@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RxOTG/RxOTG.iml" filepath="$PROJECT_DIR$/RxOTG/RxOTG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RxDevice/RxDevice.iml" filepath="$PROJECT_DIR$/RxDevice/RxDevice.iml" />
       <module fileurl="file://$PROJECT_DIR$/RxOtg.iml" filepath="$PROJECT_DIR$/RxOtg.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

@@ -1,1 +1,1 @@
-include ':app', ':RxOTG'
+include ':app', ':RxDevice'

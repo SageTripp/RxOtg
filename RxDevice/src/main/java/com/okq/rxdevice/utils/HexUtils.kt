@@ -1,4 +1,4 @@
-package com.okq.rxotg.utils
+package com.okq.rxdevice.utils
 
 /**
  * Created by zst on 2016-10-14  0014.

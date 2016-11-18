@@ -3,32 +3,45 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.jfrog.bintray'//添加bintray插件
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.okq.RxOtg'
-version = '0.0.2'
+group = 'com.okq.RxDevice'
+version = '0.0.1'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
 
     }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            jniDebuggable true
+        }
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
     repositories {
         mavenCentral()
     }
@@ -53,7 +66,6 @@ android {
         archives javadocJar
         archives sourcesJar
     }
-
 }
 
 Properties properties = new Properties()
@@ -68,9 +80,9 @@ bintray {
         name = 'com.okq.RxOtg'
 
         version {
-            name = '0.0.2'
-            desc = "Rx模式的OTG通信,主要用于RS485通信"
-            vcsTag = '0.0.2'
+            name = '0.0.1'
+            desc = "Rx模式的OTG通信,可通过RS485或OTG通信"
+            vcsTag = '0.0.1'
         }
 
         licenses = ['Apache-2.0']
@@ -84,7 +96,7 @@ bintray {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:25.0.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'io.reactivex:rxjava:1.2.1'
     compile 'io.reactivex:rxandroid:1.2.1'
